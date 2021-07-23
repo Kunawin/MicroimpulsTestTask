@@ -1,25 +1,25 @@
 let app = {
-    states: [categoriesState, filmsState],
+    states: {"categoryState": categoriesState, "filmsState": filmsState},
     _currentState: null,
 
     init: function () {
-        for (let i = 0; i < this.states.length; i++){
-            if (this.states[i].init !== undefined){
-                this.states[i].init();
+        for (let key in this.states){
+            if (this.states[key].init !== undefined){
+                this.states[key].init();
             }
         }
 
-        this.setFocusedState(0);
+        this.setFocusedState("categoryState");
     },
 
-    setFocusedState: function (index) {
-        if (index < 0 || index >= this.states.length){
+    setFocusedState: function (stateKey) {
+        if (!stateKey in this.states){
             return;
         }
 
-        if(app.states[index].canSetFocus()){
+        if(app.states[stateKey].canSetFocus()){
             this._currentState?.removeFocus();
-            this._currentState = this.states[index];
+            this._currentState = this.states[stateKey];
             this._currentState.setFocus();
         }
     },

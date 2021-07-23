@@ -48,7 +48,7 @@ let categoriesState = {
 
         this.setFocus();
 
-        app.states[1].update(config.categories[this._currentIndex]);
+        app.states["filmsState"].update(config.categories[this._currentIndex]);
     },
 
     _removeLine: function () {
@@ -69,12 +69,12 @@ let categoriesState = {
     },
 
     downAction: function(){
-        app.setFocusedState(1);
+        app.setFocusedState("filmsState");
     },
 
     canSetFocus: function(){
         if (this._currentIndex === -1){
-            return false
+            return false;
         }
 
         return true;
@@ -89,8 +89,6 @@ let categoriesState = {
         this._removeLine();
         this._addLine(this._currentIndex);
         config.categories[this._currentIndex].HTMLElement.classList.add("focus");
-
-        return true;
     },
 
     removeFocus: function () {

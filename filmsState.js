@@ -1,19 +1,18 @@
 let filmsState = {
-    _filmList: null,
+    _filmList: document.querySelector(".films-container ul"),
     _filmsArr: null,
+    _filmNameElement: document.querySelector(".filmName"),
+    _filmDescriptionList: document.querySelector(".description ul"),
     _defaultLeftPosition: 520,
     _currentIndex: -1,
     _currentLeftPosition: 0,
     _bgElement: document.querySelector("div.background"),
 
     update: function(category) {
-        document.querySelector("div.films-container").children[0]?.remove();
-        this._currentIndex = -1;
-        this._currentLeftPosition = this._defaultLeftPosition;
+        this._setDefault();
 
         if (category.filmNames.length === 0 ){
-            this._setBackground("img/default-bg.png");
-            document.querySelector(".filmName").innerHTML = "";
+            this._setEmpty();
             return;
         }
 
@@ -45,8 +44,31 @@ let filmsState = {
 
         this._currentIndex = index;
 
-        this._setBackground(this._filmsArr[this._currentIndex].imgPath);
-        document.querySelector(".filmName").innerHTML = this._filmsArr[this._currentIndex].name;
+        this._sefFilmDescription(this._filmsArr[this._currentIndex]);
+    },
+
+    _sefFilmDescription(film){
+        this._setBackground(film.imgPath);
+        this._filmNameElement.innerHTML = film.name;
+        let HTMLstr = '<li>' + film.countries.toString().replace(",", ", ") +
+            ', ' + film.year + '</li>'+
+            '<li>'+ film.genres.toString().replace(",", ", ") + '</li>'+
+            '<li><div class="rect">' + film.parentalGuidance + '+' + '</div></li>'+
+            '<li>IMDb: ' + film.imdRating + ' <img src="img/rating-star-icon.png"> Кинопоиск: ' + film.kpRating +
+            ' <img src="img/rating-star-icon.png"></li>';
+        this._filmDescriptionList.innerHTML = HTMLstr;
+    },
+
+    _setDefault: function(){
+        this._filmList.innerHTML = "";
+        this._currentIndex = -1;
+        this._currentLeftPosition = this._defaultLeftPosition;
+    },
+
+    _setEmpty: function(){
+        this._setBackground("img/default-bg.png");
+        this._filmNameElement.innerHTML = "";
+        this._filmDescriptionList.innerHTML = "";
     },
 
     leftAction: function(){
@@ -60,7 +82,7 @@ let filmsState = {
     },
 
     upAction: function(){
-        app.setFocusedState(0);
+        app.setFocusedState("categoryState");
     },
 
     canSetFocus: function(){
@@ -97,7 +119,7 @@ let filmsState = {
     },
 
     _renderFilms: function () {
-        this._filmList = document.createElement("ul");
+        this._filmList.innerHTML = "";
         for (let i = 0; i < this._filmsArr.length; i++) {
             let li = document.createElement("li");
             let img = document.createElement("img");

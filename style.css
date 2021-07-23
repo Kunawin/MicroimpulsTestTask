@@ -125,3 +125,42 @@ div.circle{
     color: lightgray;
 }
 
+.description{
+    margin: 0px;
+    position: relative;
+    width: 1200px;
+    top: 200px;
+    height: 100px;
+    left: 25px;
+    display: block;
+    text-align: center;
+    font: 20pt/8pt sans-serif;
+    color: lightgray;
+}
+
+.description ul{
+    margin: 0px;
+    display: block;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.description ul li img{
+    margin-right: 15px;
+}
+
+.description ul li {
+    margin: 0px 10px;
+    display: inline-block;
+    vertical-align: center;
+}
+
+.description ul div.rect {
+    height: 35px;
+    width: 60px;
+    font: 22pt/8pt sans-serif;
+    border: 2px solid grey;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 37px;
+}
