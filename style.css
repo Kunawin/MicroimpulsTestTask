@@ -7,7 +7,6 @@ div.container{
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 3;
     overflow: hidden;
 }
 
@@ -19,11 +18,50 @@ div.background {
     -webkit-filter: blur(10px) brightness(50%);
 }
 
+div.right-shadow, div.left-shadow, div.top-shadow, div.bottom-shadow {
+    background-size: cover;
+    position: absolute;
+    z-index: 3;
+}
+
+div.right-shadow, div.left-shadow {
+    top: 0px;
+    width: 66px;
+    height: 720px;
+}
+
+div.top-shadow, div.bottom-shadow{
+    width: 1280px;
+    height: 66px;
+    left: 0px;
+}
+
+div.bottom-shadow{
+    background: url("img/bottom-shadow.png");
+    bottom: 0px;
+}
+
+div.top-shadow{
+    background: url("img/top-shadow.png");
+    top: 0px;
+}
+
+div.right-shadow{
+    background: url("img/right-shadow.png");
+    right: 0px;
+}
+
+div.left-shadow{
+    background: url("img/left-shadow.png");
+    left: 0px;
+}
+
 ul.menu-container{
     padding: 0px;
     margin: 20px 0px;
     position: relative;
     left: 500px;
+    z-index: 5;
 }
 
 ul.menu-container .circle.focus{
@@ -44,6 +82,7 @@ ul.menu-container, div.options{
     padding: 0px;
     position: relative;
     left: 850px;
+    z-index: 5;
 }
 
 div.circle{
@@ -128,17 +167,17 @@ div.circle{
 .description{
     margin: 0px;
     position: relative;
-    width: 1200px;
+    width: 1240px;
     top: 200px;
     height: 100px;
-    left: 25px;
-    display: block;
-    text-align: center;
+    left: 35px;
     font: 20pt/8pt sans-serif;
     color: lightgray;
+    z-index: 5;
 }
 
 .description ul{
+    padding: 0px;
     margin: 0px;
     display: block;
     text-align: center;
@@ -150,9 +189,8 @@ div.circle{
 }
 
 .description ul li {
-    margin: 0px 10px;
+    margin-right: 20px;
     display: inline-block;
-    vertical-align: center;
 }
 
 .description ul div.rect {

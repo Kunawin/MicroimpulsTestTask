@@ -50,13 +50,13 @@ let filmsState = {
     _sefFilmDescription(film){
         this._setBackground(film.imgPath);
         this._filmNameElement.innerHTML = film.name;
-        let HTMLstr = '<li>' + film.countries.toString().replace(",", ", ") +
+        let str = '<li>' + film.countries.toString().replace(",", ", ") +
             ', ' + film.year + '</li>'+
             '<li>'+ film.genres.toString().replace(",", ", ") + '</li>'+
             '<li><div class="rect">' + film.parentalGuidance + '+' + '</div></li>'+
             '<li>IMDb: ' + film.imdRating + ' <img src="img/rating-star-icon.png"> Кинопоиск: ' + film.kpRating +
             ' <img src="img/rating-star-icon.png"></li>';
-        this._filmDescriptionList.innerHTML = HTMLstr;
+        this._filmDescriptionList.innerHTML = str;
     },
 
     _setDefault: function(){
