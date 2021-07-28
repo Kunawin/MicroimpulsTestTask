@@ -1,12 +1,18 @@
-let filmsState = {
+var filmsState = {
     _filmList: document.querySelector(".films-container ul"),
+    // _filmList: document.getElementsByClassName("films-container")[0].children[0],
+
     _filmsArr: null,
     _filmNameElement: document.querySelector(".filmName"),
+    // _filmNameElement: document.getElementsByClassName("filmName")[0],
+
     _filmDescriptionList: document.querySelector(".description ul"),
+    // _filmDescriptionList: document.getElementsByClassName("description")[0].children[0],
     _defaultLeftPosition: 520,
     _currentIndex: -1,
     _currentLeftPosition: 0,
     _bgElement: document.querySelector("div.background"),
+    // _bgElement: document.getElementsByClassName("background")[0],
 
     update: function(category) {
         this._setDefault();
@@ -17,7 +23,7 @@ let filmsState = {
         }
 
         this._filmsArr = [];
-        for (let i = 0; i < category.filmNames.length; i++){
+        for (var i = 0; i < category.filmNames.length; i++){
             this._filmsArr.push(CopyObj(config.films[category.filmNames[i]]));
         }
         this._renderFilms();
@@ -30,7 +36,7 @@ let filmsState = {
             return;
         }
 
-        let offset = 0;
+        var offset = 0;
         if(this._currentIndex !== -1)
         {
             this.removeFocus();
@@ -47,10 +53,10 @@ let filmsState = {
         this._sefFilmDescription(this._filmsArr[this._currentIndex]);
     },
 
-    _sefFilmDescription(film){
+    _sefFilmDescription: function(film){
         this._setBackground(film.imgPath);
         this._filmNameElement.innerHTML = film.name;
-        let str = '<li>' + film.countries.toString().replace(",", ", ") +
+        var str = '<li>' + film.countries.toString().replace(",", ", ") +
             ', ' + film.year + '</li>'+
             '<li>'+ film.genres.toString().replace(",", ", ") + '</li>'+
             '<li><div class="rect">' + film.parentalGuidance + '+' + '</div></li>'+
@@ -82,7 +88,7 @@ let filmsState = {
     },
 
     upAction: function(){
-        app.setFocusedState("categoryState");
+        mainApp.setFocusedState("categoryState");
     },
 
     canSetFocus: function(){
@@ -98,31 +104,42 @@ let filmsState = {
             return;
         }
 
-        document.querySelector("div.films-container .focus")?.classList.remove("focus");
-        this._removeLine();
+        this.removeFocus();
         this._addLine(this._currentIndex);
         this._filmsArr[this._currentIndex].HTMLElement.classList.add("focus");
     },
 
     removeFocus: function(){
-        document.querySelector("div.films-container .focus")?.classList.remove("focus");
+        // var temp = document.getElementsByClassName("films-container")[0]
+        //     .getElementsByClassName("focus")[0];
+        var temp = document.querySelector(".films-container .focus");
+
+        if ( temp ){
+            temp.classList.remove("focus");
+        }
         this._removeLine();
     },
 
     _removeLine: function () {
-        document.querySelector("div.films-container div.line")?.remove();
+        // var temp = document.getElementsByClassName("films-container")[0]
+        //     .getElementsByClassName("line")[0];
+        var temp = document.querySelector(".films-container .line");
+
+        if(temp){
+            temp.remove();
+        }
     },
 
     _addLine: function (index) {
-        this._filmsArr[this._currentIndex].HTMLElement.insertAdjacentHTML("beforeend",
+        this._filmsArr[index].HTMLElement.insertAdjacentHTML("beforeend",
             '<div class="line"></div>');
     },
 
     _renderFilms: function () {
         this._filmList.innerHTML = "";
-        for (let i = 0; i < this._filmsArr.length; i++) {
-            let li = document.createElement("li");
-            let img = document.createElement("img");
+        for (var i = 0; i < this._filmsArr.length; i++) {
+            var li = document.createElement("li");
+            var img = document.createElement("img");
             img.src = this._filmsArr[i].imgPath;
             li.appendChild(img);
             this._filmList.appendChild(li);
@@ -130,6 +147,7 @@ let filmsState = {
         }
         this._filmList.style.left = this._defaultLeftPosition + "px";
         document.querySelector(".films-container").appendChild(this._filmList);
+        // document.getElementsByClassName("films-container")[0].appendChild(this._filmList);
     },
 
     _setBackground: function(imgPath){

@@ -1,4 +1,4 @@
-let config = {
+var config = {
     films: {
         "HungerGames": new Film("Голодные игры", "FilmImages/HungerGames.jpg",2012, 12,
             7.2, 7.256, ["США"], ["Боевик", "Фантастика"]),
@@ -20,3 +20,4 @@ let config = {
         new Category("Приключения", ["LordOfTheRing", "HarryPotter"])
     ]
 };
+

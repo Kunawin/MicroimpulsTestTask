@@ -1,5 +1,5 @@
-let categoriesState = {
-    _categoryList: null,
+var categoriesState = {
+    _categoryList: document.getElementsByClassName("category-container")[0].children[0],
     _currentIndex: -1,
     _leftPosition: 200,
 
@@ -9,17 +9,17 @@ let categoriesState = {
     },
 
     _renderCategory: function(){
-        this._categoryList = document.createElement("ul");
         if (config.categories.length !== 0){
-            for (let i = 0; i < config.categories.length; i++){
-                let listItem = document.createElement("li");
-                let div = document.createElement('div');
+            for (var i = 0; i < config.categories.length; i++){
+                var listItem = document.createElement("li");
+                var div = document.createElement('div');
                 div.innerText = config.categories[i].name;
                 listItem.appendChild(div);
                 this._categoryList.appendChild(listItem);
                 config.categories[i].HTMLElement = listItem;
             }
             document.querySelector(".category-container").appendChild(this._categoryList);
+            // document.getElementsByClassName("category-container")[0].appendChild(this._categoryList);
         }
     },
 
@@ -28,7 +28,7 @@ let categoriesState = {
             return;
         }
 
-        let offset = 0;
+        var offset = 0;
         if(this._currentIndex !== -1) {
             config.categories[this._currentIndex].HTMLElement.classList.remove("current");
 
@@ -48,11 +48,15 @@ let categoriesState = {
 
         this.setFocus();
 
-        app.states["filmsState"].update(config.categories[this._currentIndex]);
+        mainApp.states["filmsState"].update(config.categories[this._currentIndex]);
     },
 
     _removeLine: function () {
-        document.querySelector(".category-container .line")?.remove();
+        var temp = document.getElementsByClassName("category-container")[0]
+                 .getElementsByClassName("line")[0];
+        if(temp){
+           temp.remove();
+        }
     },
 
     _addLine:function (index) {
@@ -69,7 +73,11 @@ let categoriesState = {
     },
 
     downAction: function(){
-        app.setFocusedState("filmsState");
+        mainApp.setFocusedState("filmsState");
+    },
+
+    upAction: function(){
+        mainApp.setFocusedState("menuState");
     },
 
     canSetFocus: function(){
@@ -85,14 +93,23 @@ let categoriesState = {
             return;
         }
 
-        document.querySelector("div.category-container .focus")?.classList.remove("focus");
-        this._removeLine();
+        this.removeFocus();
         this._addLine(this._currentIndex);
         config.categories[this._currentIndex].HTMLElement.classList.add("focus");
+
+        this._categoryList.classList.add("active");
     },
 
     removeFocus: function () {
-        document.querySelector("div.category-container .focus")?.classList.remove("focus");
+        // var temp = document.getElementsByClassName("category-container")[0]
+        //     .getElementsByClassName("focus")[0];
+        var temp = document.querySelector(".category-container .focus");
+
+        if (temp){
+            temp.classList.remove("focus");
+        }
         this._removeLine();
-    }
+        this._categoryList.classList.remove("active");
+    },
 };
+

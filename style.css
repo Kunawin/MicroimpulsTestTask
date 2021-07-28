@@ -38,7 +38,7 @@ div.top-shadow, div.bottom-shadow{
 
 div.bottom-shadow{
     background: url("img/bottom-shadow.png");
-    bottom: 0px;
+    top: 654px;
 }
 
 div.top-shadow{
@@ -48,7 +48,7 @@ div.top-shadow{
 
 div.right-shadow{
     background: url("img/right-shadow.png");
-    right: 0px;
+    left: 1214px;
 }
 
 div.left-shadow{
@@ -64,34 +64,66 @@ ul.menu-container{
     z-index: 5;
 }
 
-ul.menu-container .circle.focus{
-    border-color: dodgerblue;
-    box-shadow: 0 0 10px 5px dodgerblue;
+ul.menu-container div.focus, .settings-container div.focus{
+    box-shadow: 0 0 10px 5px #1e90ff;
+    background-position: 0 -208px;
 }
 
-ul.menu-container .circle.current{
-   background: grey;
-}
-
-ul.menu-container, div.options{
+ul.menu-container, div.settings-container{
     display: inline-block;
 }
 
-.options{
+.settings-container{
     margin: 20px 0px;
     padding: 0px;
     position: relative;
-    left: 850px;
+    left: 890px;
     z-index: 5;
 }
 
-div.circle{
-    width: 47px;
-    height: 47px;
+ul.menu-container div, .settings-container div{
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: inline-block;
-    border: 5px solid grey;
+    /*border: 5px solid #808080;*/
     margin: 10px;
+}
+
+.header.active .menu-container div, .header.active .settings-container div{
+    background-position: 0 -52px;
+}
+
+.header ul.menu-container div.selected, .header .settings-container div.selected{
+    background-position: 0 -104px;
+}
+
+.header ul.menu-container div.selected.focus, .header .settings-container div.selected.focus{
+    background-position: 0 -156px;
+}
+
+.header ul.menu-container div.focus, .header .settings-container div.focus{
+    background-position: 0 -208px;
+}
+
+.settings-container div {
+    background: url("img/menubar-settings-icon.png");
+}
+
+.menu-container div.search{
+    background: url("img/menubar-search-icon.png");
+}
+
+.menu-container div.live{
+    background: url("img/menubar-live-icon.png");
+}
+
+.menu-container div.vod{
+    background: url("img/menubar-vod-icon.png");
+}
+
+.menu-container div.apps{
+    background: url("img/menubar-apps-icon.png");
 }
 
 .category-container ul li, .films-container ul li{
@@ -101,6 +133,7 @@ div.circle{
 
 .category-container ul li.current{
     transform: scale(1.25, 1.25);
+    -webkit-transform: scale(1.25, 1.25);
     margin: 0px 30px;
     text-transform: uppercase;
 }
@@ -110,10 +143,15 @@ div.circle{
     margin: 0px;
     padding: 0px;
     font: bold 20pt/8pt sans-serif;
-    color: grey;
+    color: #808080;
     left: 0px;
     transition: 0.5s left;
     white-space: nowrap;
+    height: 26px;
+}
+
+.category-container ul.active {
+    color: #d3d3d3;
 }
 
 .category-container .line {
@@ -128,8 +166,12 @@ div.circle{
     display: block;
     height: 7px;
     border-radius: 4px;
-    background: dodgerblue;
-    box-shadow: 0 2px 10px dodgerblue;
+    background: #1e90ff;
+    box-shadow: 0 2px 10px #1e90ff;
+}
+
+.films-container {
+    position: relative;
 }
 
 .films-container img {
@@ -147,10 +189,12 @@ div.circle{
     top: 90px;
     transition: 0.5s left;
     white-space: nowrap;
+    height: 300px;
 }
 
 .films-container ul li.focus{
     transform: scale(1.25, 1.25);
+    -webkit-transform: scale(1.25, 1.25);
     margin: 0px 40px;
 }
 
@@ -161,7 +205,8 @@ div.circle{
     display: block;
     text-align: center;
     font: bold 38pt/6pt Arial;
-    color: lightgray;
+    color: #d3d3d3;
+    z-index: 5;
 }
 
 .description{
@@ -172,7 +217,7 @@ div.circle{
     height: 100px;
     left: 35px;
     font: 20pt/8pt sans-serif;
-    color: lightgray;
+    color: #d3d3d3;
     z-index: 5;
 }
 
@@ -197,7 +242,7 @@ div.circle{
     height: 35px;
     width: 60px;
     font: 22pt/8pt sans-serif;
-    border: 2px solid grey;
+    border: 2px solid #808080;
     border-radius: 10px;
     text-align: center;
     line-height: 37px;

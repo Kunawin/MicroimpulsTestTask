@@ -1,10 +1,10 @@
-let app = {
-    states: {"categoryState": categoriesState, "filmsState": filmsState},
+var mainApp = {
+    states: {categoryState: categoriesState, filmsState: filmsState, menuState: menuState},
     _currentState: null,
 
     init: function () {
-        for (let key in this.states){
-            if (this.states[key].init !== undefined){
+        for (var key in this.states){
+            if (this.states[key].init){
                 this.states[key].init();
             }
         }
@@ -17,55 +17,57 @@ let app = {
             return;
         }
 
-        if(app.states[stateKey].canSetFocus()){
-            this._currentState?.removeFocus();
+        if(mainApp.states[stateKey].canSetFocus()){
+            if (this._currentState){
+                this._currentState.removeFocus();
+            }
             this._currentState = this.states[stateKey];
             this._currentState.setFocus();
         }
     },
 
     leftAction:function () {
-        if (this._currentState.leftAction !== undefined){
+        if (this._currentState.leftAction){
             this._currentState.leftAction();
         }
     },
 
     rightAction:function () {
-        if (this._currentState.rightAction !== undefined){
+        if (this._currentState.rightAction){
             this._currentState.rightAction();
         }
     },
 
     upAction:function () {
-        if (this._currentState.upAction !== undefined){
+        if (this._currentState.upAction){
             this._currentState.upAction();
         }
     },
 
     downAction:function () {
-        if (this._currentState.downAction !== undefined){
+        if (this._currentState.downAction){
             this._currentState.downAction();
         }
     },
 };
 
 window.onload = function () {
-    app.init();
+    mainApp.init();
 
     window.addEventListener("keydown", function (key) {
         switch (key.keyCode) {
-           case 37:
-               app.leftAction();
-               break;
-           case  39:
-               app.rightAction();
-               break;
+            case 37:
+                mainApp.leftAction();
+                break;
+            case  39:
+                mainApp.rightAction();
+                break;
             case 38:
-                app.upAction();
+                mainApp.upAction();
                 break;
             case  40:
-                app.downAction();
+                mainApp.downAction();
                 break;
-       }
+        }
     });
 };
