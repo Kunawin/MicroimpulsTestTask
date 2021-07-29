@@ -1,18 +1,13 @@
 var filmsState = {
     _filmList: document.querySelector(".films-container ul"),
-    // _filmList: document.getElementsByClassName("films-container")[0].children[0],
-
+    _emptyStrElement: document.querySelector(".emptyStr-container"),
     _filmsArr: null,
     _filmNameElement: document.querySelector(".filmName"),
-    // _filmNameElement: document.getElementsByClassName("filmName")[0],
-
     _filmDescriptionList: document.querySelector(".description ul"),
-    // _filmDescriptionList: document.getElementsByClassName("description")[0].children[0],
     _defaultLeftPosition: 520,
     _currentIndex: -1,
     _currentLeftPosition: 0,
     _bgElement: document.querySelector("div.background"),
-    // _bgElement: document.getElementsByClassName("background")[0],
 
     update: function(category) {
         this._setDefault();
@@ -42,6 +37,10 @@ var filmsState = {
             this.removeFocus();
             offset = getCoords(this._filmsArr[index].HTMLElement).left -
                 getCoords(this._filmsArr[this._currentIndex].HTMLElement).left;
+        }
+
+        if (this._emptyStrElement.classList.contains("active")){
+            this._emptyStrElement.classList.remove("active");
         }
 
         this._currentLeftPosition = this._currentLeftPosition - offset;
@@ -75,6 +74,9 @@ var filmsState = {
         this._setBackground("img/default-bg.png");
         this._filmNameElement.innerHTML = "";
         this._filmDescriptionList.innerHTML = "";
+        if (!this._emptyStrElement.classList.contains("active")){
+            this._emptyStrElement.classList.add("active");
+        }
     },
 
     leftAction: function(){

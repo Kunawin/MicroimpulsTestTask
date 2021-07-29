@@ -107,23 +107,23 @@ ul.menu-container div, .settings-container div{
 }
 
 .settings-container div {
-    background: url("img/menubar-settings-icon.png");
+    background: url("img/menubar-settings-icon.png") no-repeat;
 }
 
 .menu-container div.search{
-    background: url("img/menubar-search-icon.png");
+    background: url("img/menubar-search-icon.png") no-repeat;
 }
 
 .menu-container div.live{
-    background: url("img/menubar-live-icon.png");
+    background: url("img/menubar-live-icon.png") no-repeat;
 }
 
 .menu-container div.vod{
-    background: url("img/menubar-vod-icon.png");
+    background: url("img/menubar-vod-icon.png") no-repeat;
 }
 
 .menu-container div.apps{
-    background: url("img/menubar-apps-icon.png");
+    background: url("img/menubar-apps-icon.png") no-repeat;
 }
 
 .category-container ul li, .films-container ul li{
@@ -246,4 +246,18 @@ ul.menu-container div, .settings-container div{
     border-radius: 10px;
     text-align: center;
     line-height: 37px;
+}
+
+.emptyStr-container{
+    position: absolute;
+    top: 220px;
+    left: 1280px;
+    color: #d3d3d3;
+    font: 16pt/8pt sans-serif;
+    white-space: nowrap;
+}
+
+.emptyStr-container.active{
+    left: 430px;
+    transition: 0.7s left;
 }
