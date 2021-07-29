@@ -189,9 +189,11 @@ ul.menu-container div, .settings-container div{
     top: 90px;
     transition: 0.5s left;
     white-space: nowrap;
-    height: 300px;
+    height: 290px;
 }
-
+.films-container ul li{
+    height: 287px;
+}
 .films-container ul li.focus{
     transform: scale(1.25, 1.25);
     -webkit-transform: scale(1.25, 1.25);
